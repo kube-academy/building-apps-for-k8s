@@ -1,0 +1,11 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: developer-productivity-pod
+  labels:
+    app: kubeacademy
+spec:
+  containers:
+  - name: developer-productivity-container
+    image: lander2k2/developer-productivity:0.1
+
