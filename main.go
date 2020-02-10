@@ -20,7 +20,7 @@ func main() {
 
 	initLog(os.Stdout)
 
-	Info.Println("Developer Productivity app starting")
+	Info.Println("Building Apps For K8s app starting")
 
 	http.HandleFunc("/", handler)
 	http.ListenAndServe(":8000", nil)
@@ -29,5 +29,5 @@ func main() {
 func handler(w http.ResponseWriter, r *http.Request) {
 
 	Info.Printf("Request received from %s", r.RemoteAddr)
-	fmt.Fprintf(w, "Developer Productivity app says Hi")
+	fmt.Fprintf(w, "Building Apps For K8s app says Hi")
 }
