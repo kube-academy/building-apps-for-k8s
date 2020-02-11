@@ -1,7 +1,7 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: developer-productivity-deploy
+  name: building-apps-deploy
   labels:
     app: kubeacademy
 spec:
@@ -15,6 +15,6 @@ spec:
         app: kubeacademy
     spec:
       containers:
-      - name: developer-productivity-container
-        image: lander2k2/developer-productivity:0.1
+      - name: building-apps-container
+        image: lander2k2/building-apps:0.1
 
