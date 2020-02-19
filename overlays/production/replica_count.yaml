@@ -1,6 +1,6 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: developer-productivity-deploy
+  name: building-apps-deploy
 spec:
   replicas: 5
