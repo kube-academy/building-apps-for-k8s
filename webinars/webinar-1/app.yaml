@@ -1,0 +1,42 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    run: eric
+  name: eric
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      run: eric
+  strategy: {}
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        run: eric
+    spec:
+      containers:
+      - image: app:6
+        name: eric
+---
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    run: eric
+  name: eric
+spec:
+  type: NodePort
+  ports:
+    - port: 8080
+      protocol: TCP
+      targetPort: 8080
+  selector:
+    run: eric
+
+
+#    readinessProbe:
+#      httpGet:
+#        port: 8080
+#        path: /foo
