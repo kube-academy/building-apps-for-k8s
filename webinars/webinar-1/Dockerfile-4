@@ -1,0 +1,27 @@
+ARG MVN_VERSION=3.6.3
+ARG JDK_VERSION=11
+
+FROM maven:${MVN_VERSION}-jdk-${JDK_VERSION}-slim as build
+
+WORKDIR /build
+
+COPY ./pom.xml /build/
+COPY ./src /build/src/
+# build the project
+RUN mvn clean package
+
+
+FROM gcr.io/distroless/java:${JDK_VERSION}
+
+WORKDIR /application
+COPY --from=build /build/target/*.jar /application/k8sdemo.jar
+EXPOSE 8080
+
+ENV _JAVA_OPTIONS "-XX:MinRAMPercentage=60.0 -XX:MaxRAMPercentage=90.0 \
+-Djava.security.egd=file:/dev/./urandom \
+-Djava.awt.headless=true -Dfile.encoding=UTF-8 \
+-Dspring.output.ansi.enabled=ALWAYS \
+-Dspring.profiles.active=default"
+
+# set entrypoint to layered Spring Boot application
+ENTRYPOINT ["java", "-jar", "k8sdemo.jar"]
